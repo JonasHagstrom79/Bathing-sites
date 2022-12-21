@@ -1,3 +1,5 @@
 <resources>
     <string name="app_name">Bathing Sites</string>
+    <string name="bathingSitesText">0 bathing sites</string>
+    <string name="imageDescription">A sunny beach with blue water</string>
 </resources>
