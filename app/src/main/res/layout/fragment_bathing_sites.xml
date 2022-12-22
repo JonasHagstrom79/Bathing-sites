@@ -5,10 +5,9 @@
     android:layout_height="match_parent"
     tools:context=".BathingSitesFragment">
 
-    <!-- TODO: Update blank fragment layout -->
-    <TextView
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:text="@string/hello_blank_fragment" />
+    <se.miun.caha1906.dt031g.bathingsites.BathingSitesView
+        android:layout_width="200sp"
+        android:layout_height="300sp"
+        android:layout_gravity="center" />
 
 </FrameLayout>

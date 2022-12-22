@@ -2,6 +2,7 @@ package se.miun.caha1906.dt031g.bathingsites;
 
 import android.content.Context;
 import android.content.res.TypedArray;
+import android.text.TextUtils;
 import android.util.AttributeSet;
 import android.widget.TextView;
 
@@ -63,9 +64,41 @@ public class BathingSitesView extends ConstraintLayout {
 
         // Retrieve custom attributes - No need?
         TypedArray customAttributes = getContext().getTheme().obtainStyledAttributes(
-                attrs,
-                R.styleable.BathingSitesView,
-                0,0);
+                attrs, // The base set of attribute values. May be null.
+                R.styleable.BathingSitesView, // Our custom attributes to be retrieved (in res/values/attrs.xml).
+                0,0); // 0 = do to not look for default values
+
+        String message;
+
+        // Get the values from the custom attributes
+        try {
+            message = customAttributes.getString(
+                    R.styleable.BathingSitesView_message);
+
+        } finally {
+            customAttributes.recycle();
+        }
+
+        // Update the view to show string from attribute
+        setMessage(message);
+
+        // Call setSaveEnabled(true) to indicate that this view intends to save its state
+        setSaveEnabled(true);
+
+    }
+
+    /**
+     * Sets the message for the view
+     * */
+    private void setMessage(@NonNull String newMessage) {
+
+        if (TextUtils.isEmpty(newMessage)) {
+
+            return;
+        }
+
+        TextView message = findViewById(R.id.textViewBathingSitesView);
+        message.setText(newMessage);
 
     }
 
