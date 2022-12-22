@@ -1,6 +1,7 @@
 package se.miun.caha1906.dt031g.bathingsites;
 
 import android.content.Context;
+import android.content.res.TypedArray;
 import android.util.AttributeSet;
 import android.widget.TextView;
 
@@ -10,10 +11,15 @@ import androidx.constraintlayout.widget.ConstraintLayout;
 
 public class BathingSitesView extends ConstraintLayout {
 
-    /***
+    /**
      * Keeps track of the number of stored bathing sites
      */
     private int bathingSites;
+
+    /**
+     * The view
+     */
+    BathingSitesView bathingSitesView = this;
 
     /**
      * Custom constructor to use whe setting
@@ -49,12 +55,16 @@ public class BathingSitesView extends ConstraintLayout {
      */
     private void init(AttributeSet attrs) {
 
-        //Inflate
+        // Inflate
+        inflate(getContext(), R.layout.view_bathingsitesview, this);
 
         // Animate clicks maybe?
 
-        // Retrieve custom attributes
-
+        // Retrieve custom attributes - No need?
+//        TypedArray customAttributes = getContext().getTheme().obtainStyledAttributes(
+//                attrs,
+//                R.styleable
+//        )
     }
 
     /**
