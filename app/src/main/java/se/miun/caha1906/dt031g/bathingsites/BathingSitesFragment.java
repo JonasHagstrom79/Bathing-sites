@@ -13,7 +13,7 @@ import android.view.ViewGroup;
  * Use the {@link BathingSitesFragment#newInstance} factory method to
  * create an instance of this fragment.
  */
-public class BathingSitesFragment extends Fragment {
+public class BathingSitesFragment extends androidx.fragment.app.Fragment {
 
     // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER

@@ -43,6 +43,7 @@ public class BathingSitesView extends ConstraintLayout {
      */
     public BathingSitesView(@NonNull Context context, @Nullable AttributeSet attrs, int defStyleAttr) {
         super(context, attrs, defStyleAttr);
+        init(null);
     }
 
     // MAy not be needed
@@ -61,10 +62,11 @@ public class BathingSitesView extends ConstraintLayout {
         // Animate clicks maybe?
 
         // Retrieve custom attributes - No need?
-//        TypedArray customAttributes = getContext().getTheme().obtainStyledAttributes(
-//                attrs,
-//                R.styleable
-//        )
+        TypedArray customAttributes = getContext().getTheme().obtainStyledAttributes(
+                attrs,
+                R.styleable.BathingSitesView,
+                0,0);
+
     }
 
     /**
