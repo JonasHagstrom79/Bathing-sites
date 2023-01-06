@@ -4,4 +4,7 @@
     <string name="imageDescription">A sunny beach with blue water</string>
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="MainMenuTitle">Settings</string>
+    <string name="floationActionButtonText">+</string>
+    <string name="FloationActionButtonScreenReader">A green field with a plus sign to add bathingsites</string>
 </resources>

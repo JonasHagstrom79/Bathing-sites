@@ -8,12 +8,16 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import com.google.android.material.floatingactionbutton.FloatingActionButton;
+
 /**
  * A simple {@link Fragment} subclass.
  * Use the {@link BathingSitesFragment#newInstance} factory method to
  * create an instance of this fragment.
  */
 public class BathingSitesFragment extends androidx.fragment.app.Fragment {
+
+    FloatingActionButton fab;
 
     // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
@@ -53,12 +57,52 @@ public class BathingSitesFragment extends androidx.fragment.app.Fragment {
             mParam1 = getArguments().getString(ARG_PARAM1);
             mParam2 = getArguments().getString(ARG_PARAM2);
         }
+
+        // Get the views
+        //findViews();
+
+
     }
+
+    private BathingSitesView bathingSitesView; //TODO: new!
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
+
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_bathing_sites, container, false);
+        View view = inflater.inflate(R.layout.fragment_bathing_sites, container, false);
+
+        bathingSitesView =view.findViewById(R.id.bathing_site_view); //TODO: new!
+
+
+        // Get fab button from mainactivity
+        fab = getActivity().findViewById(R.id.floatingActionButton);
+
+        fab.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+
+            }
+        });
+
+        return view;
+
+        //return inflater.inflate(R.layout.fragment_bathing_sites, container, false);
+//        View rootView = inflater.inflate(R.layout.fragment_bathing_sites, container, false);
+//        // Get the views
+//        findViews();
+//        fab = rootView.findViewById(R.id.floatingActionButton);
+//        return rootView;
     }
+
+    /**
+     * Get the views
+     */
+//    private void findViews() {
+//
+//
+//        fab = rootView.findViewById(R.id.floatingActionButton);
+//
+//    }
 }
