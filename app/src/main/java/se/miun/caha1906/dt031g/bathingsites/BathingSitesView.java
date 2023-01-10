@@ -4,6 +4,7 @@ import android.content.Context;
 import android.content.res.TypedArray;
 import android.text.TextUtils;
 import android.util.AttributeSet;
+import android.util.Log;
 import android.view.View;
 import android.widget.TextView;
 
@@ -161,6 +162,7 @@ public class BathingSitesView extends ConstraintLayout {
 
     private void incrementCounter() {
         bathingSites++;
+        Log.d("TEst", "Bathingsites" + bathingSites);
         if (onCounterChangeListener != null) {
             onCounterChangeListener.onCounterChanged(bathingSites);
         }

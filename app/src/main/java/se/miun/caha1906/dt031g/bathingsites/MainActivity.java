@@ -46,6 +46,15 @@ public class MainActivity extends AppCompatActivity {
 
         bathingSiteView = findViewById(R.id.bathing_site_view);
         Log.d("BS","BathingsitesView" + bathingSiteView);
+        bathingSiteView.setOnCounterChangeListener(new BathingSitesView.OnCounterChangeListener() {
+            @Override
+            public void onCounterChanged(int counter) {
+                Toast.makeText(MainActivity.this, "HIhihih", Toast.LENGTH_SHORT).show();
+                Log.d("CustomView", "Counter: " + counter);
+            }
+        });
+
+
 //        bathingSiteView.setOnCounterChangeListener(new BathingSitesView.OnCounterChangeListener() {
 //            @Override
 //            public void onCounterChanged(int counter) {
@@ -54,12 +63,13 @@ public class MainActivity extends AppCompatActivity {
 //            }
 //        });
 
-        bathingSiteView.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Log.d("Click", "Click");
-            }
-        });
+//        bathingSiteView.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View view) {
+//                Log.d("Click", "Click");
+//            }
+//        });
+
 //        bathingSiteView.setOnClickListener(new View.OnClickListener() {
 //            @Override
 //            public void onClick(View view) {
