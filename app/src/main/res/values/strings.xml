@@ -7,4 +7,14 @@
     <string name="MainMenuTitle">Settings</string>
     <string name="floationActionButtonText">+</string>
     <string name="FloationActionButtonScreenReader">A green field with a plus sign to add bathingsites</string>
+    <string name="editTextTextBathigSiteDescription">Description</string>
+    <string name="editTextTextBathigSiteAddress">Address</string>
+    <string name="editTextTextBathingSiteName">Name</string>
+    <string name="editTextTextBathingSiteLongitude">Longitude</string>
+    <string name="editTextTextBathingSiteLatitude">Latitude</string>
+    <string name="textViewForRatingBar">Grade</string>
+    <string name="editTextTextBathingSiteWaterTemperature">Water temp</string>
+    <string name="editTextTextBathingSiteDAteForTemp">Date for temp:</string>
+    <string name="ratingBarDescription">Five stars that is rating between one and five for the bathing site</string>
+
 </resources>
