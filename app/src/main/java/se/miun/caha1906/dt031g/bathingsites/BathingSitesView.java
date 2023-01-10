@@ -4,6 +4,7 @@ import android.content.Context;
 import android.content.res.TypedArray;
 import android.text.TextUtils;
 import android.util.AttributeSet;
+import android.view.View;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
@@ -15,7 +16,9 @@ public class BathingSitesView extends ConstraintLayout {
     /**
      * Keeps track of the number of stored bathing sites
      */
-    private int bathingSites;
+    private int bathingSites = 0;
+
+
 
     /**
      * The view
@@ -60,7 +63,24 @@ public class BathingSitesView extends ConstraintLayout {
         // Inflate
         inflate(getContext(), R.layout.view_bathingsitesview, this);
 
-        // Animate clicks maybe?
+        // Clicklistener for counting
+//        setOnClickListener(new OnClickListener() {
+//            @Override
+//            public void onClick(View view) {
+//                bathingSites ++;
+//            }
+//        });
+
+        // Set the OnClickListener to call incrementCounter method
+//        if (this.onCounterChangeListener != null) {
+//            onCounterChangeListener.onCounterChanged(bathingSites);
+//        }
+        setOnClickListener(new OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                incrementCounter();
+            }
+        });
 
         // Retrieve custom attributes - No need?
         TypedArray customAttributes = getContext().getTheme().obtainStyledAttributes(
@@ -111,4 +131,40 @@ public class BathingSitesView extends ConstraintLayout {
         //return bathingSitesCount.getText().toString();
         return "..";
     }
+
+    /**
+     * Counter for bathingsites
+     */
+    public void setCounter(int counter) {
+
+        bathingSites = counter;
+
+    }
+
+    public int getCounter() {
+
+        return bathingSites;
+
+    }
+
+    ////
+
+    public interface OnCounterChangeListener {
+        void onCounterChanged(int counter);
+    }
+
+    private OnCounterChangeListener onCounterChangeListener;
+
+    public void setOnCounterChangeListener(OnCounterChangeListener listener) {
+        this.onCounterChangeListener = listener;
+    }
+
+    private void incrementCounter() {
+        bathingSites++;
+        if (onCounterChangeListener != null) {
+            onCounterChangeListener.onCounterChanged(bathingSites);
+        }
+
+    }
+
 }

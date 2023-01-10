@@ -73,18 +73,18 @@ public class BathingSitesFragment extends androidx.fragment.app.Fragment {
         // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.fragment_bathing_sites, container, false);
 
-        bathingSitesView =view.findViewById(R.id.bathing_site_view); //TODO: new!
+        bathingSitesView = view.findViewById(R.id.bathing_site_view); //TODO: new!
 
 
         // Get fab button from mainactivity
-        fab = getActivity().findViewById(R.id.floatingActionButton);
-
-        fab.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-
-            }
-        });
+//        fab = getActivity().findViewById(R.id.floatingActionButton);
+//
+//        fab.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View view) {
+//
+//            }
+//        });
 
         return view;
 
