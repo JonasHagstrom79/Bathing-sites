@@ -108,10 +108,15 @@ public class BathingSitesView extends ConstraintLayout {
 
     }
 
+    @Override
+    public void setOnClickListener(@Nullable OnClickListener l) {
+        super.setOnClickListener(l);
+    }
+
     /**
      * Sets the message for the view
      * */
-    private void setMessage(@NonNull String newMessage) {
+     public void setMessage(@NonNull String newMessage) {
 
         if (TextUtils.isEmpty(newMessage)) {
 
@@ -163,6 +168,8 @@ public class BathingSitesView extends ConstraintLayout {
     private void incrementCounter() {
         bathingSites++;
         Log.d("TEst", "Bathingsites" + bathingSites);
+        TextView countertextView = findViewById(R.id.textViewBathingSitesView);
+        countertextView.setText(String.valueOf(bathingSites + " bathing sites"));
         if (onCounterChangeListener != null) {
             onCounterChangeListener.onCounterChanged(bathingSites);
         }

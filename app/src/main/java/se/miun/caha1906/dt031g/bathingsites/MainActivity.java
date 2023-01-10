@@ -10,6 +10,7 @@ import android.util.Log;
 import android.view.Menu;
 import android.view.View;
 import android.widget.FrameLayout;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.coordinatorlayout.widget.CoordinatorLayout;
@@ -44,6 +45,10 @@ public class MainActivity extends AppCompatActivity {
 
         // Set listener to bathingsitesView //TODO: HERE; WONT WORK(NULL!)
 
+        // Get the textview to display counter
+        @SuppressLint({"MissingInflatedId", "LocalSuppress"}) TextView counterText = findViewById(R.id.textViewBathingSitesView);
+
+        // Get the bathingsitesview
         bathingSiteView = findViewById(R.id.bathing_site_view);
         Log.d("BS","BathingsitesView" + bathingSiteView);
         bathingSiteView.setOnCounterChangeListener(new BathingSitesView.OnCounterChangeListener() {
@@ -51,6 +56,7 @@ public class MainActivity extends AppCompatActivity {
             public void onCounterChanged(int counter) {
                 Toast.makeText(MainActivity.this, "HIhihih", Toast.LENGTH_SHORT).show();
                 Log.d("CustomView", "Counter: " + counter);
+                 counterText.setText(String.valueOf(counter));
             }
         });
 
