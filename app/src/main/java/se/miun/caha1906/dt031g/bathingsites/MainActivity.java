@@ -8,8 +8,11 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
+import android.widget.EditText;
 import android.widget.FrameLayout;
+import android.widget.RatingBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -17,6 +20,9 @@ import androidx.coordinatorlayout.widget.CoordinatorLayout;
 
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.android.material.snackbar.Snackbar;
+
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -29,7 +35,20 @@ public class MainActivity extends AppCompatActivity {
     private static final String TAG_FRAGMENT_BATHING_SITES = "fragment_bathing_sites"; //TODO:new!
     private BathingSitesFragment bathingSitesFragment; //TODO: new!
 
+    // Edittext from fragment
+    EditText name, description, address, longitude, latitude, waterTemp, dateForTemp;
 
+    // Ratingbar from fragment
+    RatingBar grade;
+
+    // Todays date
+    String todaysDateFormatted, nameCheck, addressCheck, longitudeCheck, latitudeCheck;
+
+    // To set todays date
+    Calendar calendar;
+
+    // Formatting the date from calendar
+    SimpleDateFormat dateFormat;
 
     @SuppressLint("ResourceType")
     @Override
@@ -59,6 +78,9 @@ public class MainActivity extends AppCompatActivity {
                  counterText.setText(String.valueOf(counter));
             }
         });
+
+        ///MENU TESTAR///
+
 
 
 //        bathingSiteView.setOnCounterChangeListener(new BathingSitesView.OnCounterChangeListener() {
@@ -164,6 +186,53 @@ public class MainActivity extends AppCompatActivity {
         return true;
     }
 
+    // Handle Clear and save
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+
+        String text = "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean euismod bibendum laoreet.";
+        StringBuilder sb = new StringBuilder(text);
+
+        int i = 0;
+        while (i + 40 < sb.length() && (i = sb.lastIndexOf(" ", i + 40)) != -1) {
+            sb.replace(i, i + 1, "\n");
+        }
+        String newText = sb.toString();
+
+
+        // Clear the input
+        if (item.getItemId() == R.id.action_clear) {
+            Toast.makeText(this, getString(R.string.toastName)+" "+"name"
+                    +"\n"+getString(R.string.toastDescription)+" "+"description"
+                    +"\n"+getString(R.string.toastAddress)+" "+"address"
+                    +"\n"+getString(R.string.toastLongitude)+" "+"Longitude"
+                    +"\n"+getString(R.string.toastLatitude)+" "+"Latitude"
+                    +"\n"+getString(R.string.toastGrade)+" "+"4.0"
+                    +"\n"+getString(R.string.toastWaterTemp)+" "+"10.4"
+                    +"\n"+getString(R.string.toastDateForTemp)+" "+"2020-08-13"
+                    ,Toast.LENGTH_SHORT).show(); //TODO:remove!
+
+            // Clear the inputfields and set todays date
+            //clearInputFields();
+            //setTodaysDate();
+
+            return true;
+        }
+
+        // Saves the input
+        if (item.getItemId() == R.id.action_save) {
+
+            if (nameIsEmpty()) {
+                name.setError(getString(R.string.nameError));
+            }
+            if (addressLongLatIsEmpty()) {
+
+            }
+
+        }
+        return super.onOptionsItemSelected(item);
+    }
+
     /**
      * Get the views
      */
@@ -173,6 +242,94 @@ public class MainActivity extends AppCompatActivity {
         //bathingSiteView = findViewById(R.id.bathing_site_view);
 
         //bathingSitesFragment = findViewById(R.id.bathingSitesFragment);
+        name = findViewById(R.id.editTextTextBathingSiteName);
+        description = findViewById(R.id.editTextTextBathigSiteDescription);
+        address = findViewById(R.id.editTextTextBathingSiteAddress);
+        longitude = findViewById(R.id.editTextTextBathingSiteLongitude);
+        latitude = findViewById(R.id.editTextTextBathingSiteLatitude);
+        grade = findViewById(R.id.ratingBar);
+        waterTemp = findViewById(R.id.editTextTextBathingSiteWaterTemperature);
+        dateForTemp = findViewById(R.id.editTextTextBathingSiteDAteForTemp);
     }
+
+    /**
+     * Clear the input fields in fragment
+     */
+    private void clearInputFields() {
+
+        name.getText().clear();
+        description.getText().clear();
+        address.getText().clear();
+        longitude.getText().clear();
+        latitude.getText().clear();
+        grade.setNumStars(0);
+        waterTemp.getText().clear();
+        dateForTemp.getText().clear();
+
+    }
+
+    /**
+     * Sets todays date in datefiled in fragment
+     * */
+    private void setTodaysDate() {
+
+        // Create an instance of calendar to get todays date
+        calendar = Calendar.getInstance();
+
+        // Formatting the date
+        dateFormat = new SimpleDateFormat("yyyy-MM-dd");
+
+        // Creates string with todays date
+        todaysDateFormatted = dateFormat.format(calendar.getTime());
+
+        // Sets the value of the field
+        dateForTemp.setText(todaysDateFormatted);
+    }
+
+    /**
+     * Check if name is empty
+     */
+    private boolean nameIsEmpty() {
+
+        // Get the string
+        nameCheck = name.getText().toString();
+
+        // Check if string is empty
+        if (nameCheck.isEmpty()) {
+            name.setError(getString(R.string.nameError));
+            return true;
+
+        }
+
+        return false;
+    }
+
+    /**
+     * Checks that if adress not submitted, both longitude and latitude must be submitted.
+     * Or if either longitude or latitude not submitted, adress must be submitted.
+     */
+    private boolean addressLongLatIsEmpty() {
+
+        addressCheck = address.getText().toString();
+        longitudeCheck = longitude.getText().toString();
+        latitudeCheck = latitude.getText().toString();
+
+        if (addressCheck.isEmpty() && (longitudeCheck.isEmpty() || latitudeCheck.isEmpty())) {
+            // Show error message because either longitude or latitude must be entered if address is not entered
+
+            return true;
+        } else if (longitudeCheck.isEmpty() && latitudeCheck.isEmpty() && addressCheck.isEmpty()) {
+            // Show error message because either address, longitude or latitude must be entered
+
+            return true;
+        } else {
+            // Continue with process, all required fields are entered
+
+            return false;
+        }
+
+    }
+
+
 
 }

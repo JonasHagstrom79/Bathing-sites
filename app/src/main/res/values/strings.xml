@@ -7,14 +7,33 @@
     <string name="MainMenuTitle">Settings</string>
     <string name="floationActionButtonText">+</string>
     <string name="FloationActionButtonScreenReader">A green field with a plus sign to add bathingsites</string>
-    <string name="editTextTextBathigSiteDescription">Description</string>
-    <string name="editTextTextBathigSiteAddress">Address</string>
-    <string name="editTextTextBathingSiteName">Name</string>
-    <string name="editTextTextBathingSiteLongitude">Longitude</string>
-    <string name="editTextTextBathingSiteLatitude">Latitude</string>
-    <string name="textViewForRatingBar">Grade</string>
-    <string name="editTextTextBathingSiteWaterTemperature">Water temp</string>
-    <string name="editTextTextBathingSiteDAteForTemp">Date for temp:</string>
+
+    <string name="textViewForRatingBar">Grade:</string>
+
     <string name="ratingBarDescription">Five stars that is rating between one and five for the bathing site</string>
+    <string name="textViewWterTemp">Water Temp:</string>
+    <string name="textViewDateForTemo">Date for temp:</string>
+    <string name="editTextWaterTempHint">enter temp</string>
+    <string name="ediTextDateHint">enter date</string>
+    <string name="textViewLongitude">Longitude:</string>
+    <string name="textViewLatitude">Latidude:</string>
+    <string name="textViewAddres">Address:</string>
+    <string name="editTextAdress">enter address</string>
+    <string name="textViewDescription">Description:</string>
+    <string name="editTextDescription">enter description of bathing site</string>
+    <string name="textViewName">Name:</string>
+    <string name="editTextName">enter name of bathig site</string>
+    <string name="editTextLongitude">enter logitude</string>
+    <string name="editTextLatitude">enter latitude</string>
+    <string name="nameError">Name is required</string>
+    <string name="toastName">Name: </string>
+    <string name="toastDescription">Description:</string>
+    <string name="toastAddress">Address:</string>
+    <string name="toastLongitude">Longitude:</string>
+    <string name="toastLatitude">Latitude:</string>
+    <string name="toastGrade">Grade:</string>
+    <string name="toastWaterTemp">Water temp:</string>
+    <string name="toastDateForTemp">Date for temp:</string>
+
 
 </resources>

@@ -10,29 +10,31 @@
         android:id="@+id/editTextTextBathingSiteName"
         android:layout_width="0dp"
         android:layout_height="0dp"
-        android:hint="Name of bathingsite"
-        app:layout_constraintWidth_percent="1"
-        app:layout_constraintHeight_percent=".15"
         android:ems="10"
+        android:hint="@string/editTextName"
         android:inputType="text"
-        android:text="@string/editTextTextBathingSiteName"
         android:required="true"
+
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHeight_percent=".08"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.002" />
+        app:layout_constraintVertical_bias="0.035"
+        app:layout_constraintWidth_percent="1" />
 
     <EditText
         android:id="@+id/editTextTextBathigSiteDescription"
         android:layout_width="0dp"
         android:layout_height="0dp"
+        android:layout_marginTop="24dp"
         android:ems="10"
+        android:hint="@string/editTextDescription"
         android:inputType="text"
-        android:text="@string/editTextTextBathigSiteDescription"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHeight_percent=".15"
+        app:layout_constraintHeight_percent=".08"
+        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/editTextTextBathingSiteName"
         app:layout_constraintWidth_percent="1" />
@@ -41,43 +43,52 @@
         android:id="@+id/editTextTextBathingSiteAddress"
         android:layout_width="0dp"
         android:layout_height="0dp"
-        app:layout_constraintWidth_percent="1"
-        app:layout_constraintHeight_percent=".15"
         android:ems="10"
+        android:hint="@string/editTextAdress"
         android:inputType="text"
         android:required="true"
-        android:text="@string/editTextTextBathigSiteAddress"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHeight_percent=".08"
+        app:layout_constraintHorizontal_bias="1.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/editTextTextBathigSiteDescription" />
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.28"
+        app:layout_constraintWidth_percent="1" />
 
     <EditText
         android:id="@+id/editTextTextBathingSiteLongitude"
         android:layout_width="0dp"
         android:layout_height="0dp"
-        app:layout_constraintWidth_percent="0.5"
-        app:layout_constraintHeight_percent=".15"
-        android:required="true"
         android:ems="10"
+        android:hint="@string/editTextLongitude"
         android:inputType="numberDecimal"
-        android:text="@string/editTextTextBathingSiteLongitude"
-        app:layout_constraintEnd_toStartOf="@+id/editTextTextBathingSiteLatitude"
+        android:required="true"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHeight_percent=".08"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/editTextTextBathingSiteAddress" />
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.404"
+        app:layout_constraintWidth_percent="0.5" />
 
     <EditText
         android:id="@+id/editTextTextBathingSiteLatitude"
         android:layout_width="0dp"
         android:layout_height="0dp"
-        app:layout_constraintWidth_percent="0.5"
-        app:layout_constraintHeight_percent=".15"
-        android:required="true"
         android:ems="10"
+        android:hint="@string/editTextLatitude"
         android:inputType="numberDecimal"
-        android:text="@string/editTextTextBathingSiteLatitude"
+        android:required="true"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/editTextTextBathingSiteAddress" />
+        app:layout_constraintHeight_percent=".08"
+        app:layout_constraintHorizontal_bias="1.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.404"
+        app:layout_constraintWidth_percent="0.5" />
 
     <TextView
         android:id="@+id/textViewGradeForRatingBar"
@@ -85,50 +96,155 @@
         android:layout_height="wrap_content"
         android:text="@string/textViewForRatingBar"
         android:textSize="18sp"
-        app:layout_constraintBottom_toTopOf="@+id/ratingBar"
+        app:layout_constraintBottom_toBottomOf="parent"
+
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/editTextTextBathingSiteLongitude"
-        app:layout_constraintVertical_bias="0.0" />
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.466"
+        app:layout_constraintWidth_percent="1" />
 
     <RatingBar
         android:id="@+id/ratingBar"
-        android:layout_width="256dp"
-        android:layout_height="58dp"
-        android:layout_marginTop="44dp"
+        android:layout_width="242dp"
+        android:layout_height="57dp"
         android:contentDescription="@string/ratingBarDescription"
         android:numStars="5"
         android:stepSize="1"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/editTextTextBathingSiteLongitude" />
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.526" />
 
     <EditText
         android:id="@+id/editTextTextBathingSiteWaterTemperature"
         android:layout_width="0dp"
         android:layout_height="0dp"
-        app:layout_constraintWidth_percent="0.3"
-        app:layout_constraintHeight_percent=".15"
         android:ems="10"
+        android:hint="@string/editTextWaterTempHint"
+
         android:inputType="number"
-        android:text="@string/editTextTextBathingSiteWaterTemperature"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toStartOf="@+id/editTextTextBathingSiteDAteForTemp"
+        app:layout_constraintHeight_percent=".08"
+        app:layout_constraintHorizontal_bias="1.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/ratingBar" />
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.647"
+        app:layout_constraintWidth_percent="0.3" />
 
     <EditText
         android:id="@+id/editTextTextBathingSiteDAteForTemp"
         android:layout_width="0dp"
         android:layout_height="0dp"
-        app:layout_constraintWidth_percent="0.7"
-        app:layout_constraintHeight_percent=".15"
         android:ems="10"
+        android:hint="@string/ediTextDateHint"
+
         android:inputType="date"
-        android:text="@string/editTextTextBathingSiteDAteForTemp"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/ratingBar" />
+        app:layout_constraintHeight_percent=".08"
+        app:layout_constraintHorizontal_bias="1.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.647"
+        app:layout_constraintWidth_percent="0.7" />
+
+    <TextView
+        android:id="@+id/textViewWaterTemp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/textViewWterTemp"
+        android:textSize="18sp"
+        app:layout_constraintBottom_toTopOf="@+id/editTextTextBathingSiteWaterTemperature"
+        app:layout_constraintEnd_toEndOf="parent"
+
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/ratingBar"
+        app:layout_constraintVertical_bias="0.0" />
+
+    <TextView
+        android:id="@+id/textViewDateForTemp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/textViewDateForTemo"
+        android:textSize="18sp"
+
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.414"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.582" />
+
+    <TextView
+        android:id="@+id/textViewLongitude"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/textViewLongitude"
+        android:textSize="18sp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.35" />
+
+    <TextView
+        android:id="@+id/textViewLatitude"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/textViewLatitude"
+        android:textSize="18sp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.611"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.35" />
+
+    <TextView
+        android:id="@+id/textViewAddress"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/textViewAddres"
+        android:textSize="18sp"
+        app:layout_constraintBottom_toTopOf="@+id/editTextTextBathingSiteAddress"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/editTextTextBathigSiteDescription"
+        app:layout_constraintVertical_bias="0.0" />
+
+    <TextView
+        android:id="@+id/textViewDescription"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/textViewDescription"
+        android:textSize="18sp"
+        app:layout_constraintBottom_toTopOf="@+id/editTextTextBathigSiteDescription"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/editTextTextBathingSiteName"
+        app:layout_constraintVertical_bias="0.0" />
+
+    <TextView
+        android:id="@+id/textViewName"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/textViewName"
+        android:textSize="18sp"
+        app:layout_constraintBottom_toTopOf="@+id/editTextTextBathingSiteName"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.0" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

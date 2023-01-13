@@ -7,4 +7,18 @@
         android:title="@string/MainMenuTitle"
         app:showAsAction="never" />
 
+    <item
+        android:id="@+id/action_clear"
+        android:icon="@drawable/delete"
+        android:title="Clear"
+        app:showAsAction="ifRoom" />
+
+    <item
+        android:id="@+id/action_save"
+        android:icon="@drawable/save"
+        android:title="save"
+        app:showAsAction="ifRoom"/>
+
+
+
 </menu>
