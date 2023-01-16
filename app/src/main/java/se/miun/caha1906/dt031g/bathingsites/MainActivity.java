@@ -7,6 +7,7 @@ import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -49,6 +50,16 @@ public class MainActivity extends AppCompatActivity {
 
     // Formatting the date from calendar
     SimpleDateFormat dateFormat;
+
+    // TextView for toast message
+    TextView toastName, toastDescription, toastAddress, toastLongitude,
+            toastLatitude, toastGrade, toastWaterTemp, toastDateForTemp;
+
+    // Toast
+    Toast toast;
+
+    // View
+    View view;
 
     @SuppressLint("ResourceType")
     @Override
@@ -119,7 +130,8 @@ public class MainActivity extends AppCompatActivity {
 
         FloatingActionButton fab2 = findViewById(R.id.floatingActionButton2);
         fab2.setOnClickListener(view -> {
-            Toast.makeText(this, "Should start a new bathingsitesactivity", Toast.LENGTH_SHORT).show();
+            //Toast.makeText(this, "Should start a new bathingsitesactivity", Toast.LENGTH_SHORT).show();
+            showToast();
         });
 
 //        FloatingActionButton fab = findViewById(R.id.floatingActionButton); //TODO:new!
@@ -223,13 +235,17 @@ public class MainActivity extends AppCompatActivity {
         if (item.getItemId() == R.id.action_save) {
 
             if (nameIsEmpty()) {
+                // Displays error messgage
                 name.setError(getString(R.string.nameError));
+
             }
             if (addressLongLatIsEmpty()) {
-
+                // Displays error message
+                //TODO: locic here or in method?
             }
 
         }
+
         return super.onOptionsItemSelected(item);
     }
 
@@ -242,6 +258,12 @@ public class MainActivity extends AppCompatActivity {
         //bathingSiteView = findViewById(R.id.bathing_site_view);
 
         //bathingSitesFragment = findViewById(R.id.bathingSitesFragment);
+
+        // Inflates the view for the toast message
+        view = LayoutInflater.from(MainActivity.this)
+                .inflate(R.layout.toast_layout, null);
+
+        // Edit text
         name = findViewById(R.id.editTextTextBathingSiteName);
         description = findViewById(R.id.editTextTextBathigSiteDescription);
         address = findViewById(R.id.editTextTextBathingSiteAddress);
@@ -250,6 +272,17 @@ public class MainActivity extends AppCompatActivity {
         grade = findViewById(R.id.ratingBar);
         waterTemp = findViewById(R.id.editTextTextBathingSiteWaterTemperature);
         dateForTemp = findViewById(R.id.editTextTextBathingSiteDAteForTemp);
+
+        // Toast
+        toastName = view.findViewById(R.id.tvMessageName);
+        toastAddress = view.findViewById(R.id.tvMessageAddress);
+        toastDescription = view.findViewById(R.id.tvMessageDescription);
+        toastLongitude = view.findViewById(R.id.tvMessageLongitude);
+        toastLatitude = view.findViewById(R.id.tvMessageLatitude);
+        toastGrade = view.findViewById(R.id.tvMessageGrade);
+        toastWaterTemp = view.findViewById(R.id.tvMessageWaterTemp);
+        toastDateForTemp = view.findViewById(R.id.tvMessageDateForTemp);
+
     }
 
     /**
@@ -328,6 +361,42 @@ public class MainActivity extends AppCompatActivity {
             return false;
         }
 
+    }
+
+    /**
+     * Displays custm toast with 8 lines of information
+     */
+    private void showToast() {
+
+        // Creates the toast
+        toast = new Toast(MainActivity.this);
+
+        // Inflates the view
+//        View view = LayoutInflater.from(MainActivity.this)
+//                .inflate(R.layout.toast_layout, null);
+//
+//        toastName = view.findViewById(R.id.tvMessageName);
+//        toastAddress = view.findViewById(R.id.tvMessageAddress);
+//        toastDescription = view.findViewById(R.id.tvMessageDescription);
+//        toastLongitude = view.findViewById(R.id.tvMessageLongitude);
+//        toastLatitude = view.findViewById(R.id.tvMessageLatitude);
+//        toastGrade = view.findViewById(R.id.tvMessageGrade);
+//        toastWaterTemp = view.findViewById(R.id.tvMessageWaterTemp);
+//        toastDateForTemp = view.findViewById(R.id.tvMessageDateForTemp);
+
+        // Set message to be displayed
+        toastName.setText(getString(R.string.toastName)+" "+"Önsjön");
+        toastDescription.setText(getString(R.string.toastDescription)+" "+ "Placeholder");
+        toastAddress.setText(getString(R.string.toastAddress)+" "+"Önsjön, Östersund");
+        toastLongitude.setText(getString(R.string.toastLongitude)+" "+"14,688506");
+        toastLatitude.setText(getString(R.string.toastLatitude)+" "+"63,261078");
+        toastGrade.setText(getString(R.string.toastGrade)+ " "+"4.0");
+        toastWaterTemp.setText(getString(R.string.toastWaterTemp)+" "+"10.4");
+        toastDateForTemp.setText(getString(R.string.toastDateForTemp)+" "+"2020-08-13");
+
+        // Set and show toast
+        toast.setView(view);
+        toast.show();
     }
 
 
