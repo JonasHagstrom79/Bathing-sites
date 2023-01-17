@@ -61,9 +61,13 @@ public class MainActivity extends AppCompatActivity {
     // View
     View view;
 
+    // Floating action button
+    FloatingActionButton fab;
+
     @SuppressLint("ResourceType")
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+        //savedInstanceState.putInt(); //TODO:här!!!!
         super.onCreate(savedInstanceState);
 
         setContentView((R.layout.activity_main));
@@ -79,16 +83,16 @@ public class MainActivity extends AppCompatActivity {
         @SuppressLint({"MissingInflatedId", "LocalSuppress"}) TextView counterText = findViewById(R.id.textViewBathingSitesView);
 
         // Get the bathingsitesview
-        bathingSiteView = findViewById(R.id.bathing_site_view);
-        Log.d("BS","BathingsitesView" + bathingSiteView);
-        bathingSiteView.setOnCounterChangeListener(new BathingSitesView.OnCounterChangeListener() {
-            @Override
-            public void onCounterChanged(int counter) {
-                Toast.makeText(MainActivity.this, "HIhihih", Toast.LENGTH_SHORT).show();
-                Log.d("CustomView", "Counter: " + counter);
-                 counterText.setText(String.valueOf(counter));
-            }
-        });
+//        bathingSiteView = findViewById(R.id.bathing_site_view);
+//        Log.d("BS","BathingsitesView" + bathingSiteView);
+//        bathingSiteView.setOnCounterChangeListener(new BathingSitesView.OnCounterChangeListener() {
+//            @Override
+//            public void onCounterChanged(int counter) {
+//                Toast.makeText(MainActivity.this, "HIhihih", Toast.LENGTH_SHORT).show();
+//                Log.d("CustomView", "Counter: " + counter);
+//                 counterText.setText(String.valueOf(counter));
+//            }
+//        });
 
         ///MENU TESTAR///
 
@@ -128,10 +132,11 @@ public class MainActivity extends AppCompatActivity {
         transaction.addToBackStack(null);
         transaction.commit();
 
-        FloatingActionButton fab2 = findViewById(R.id.floatingActionButton2);
-        fab2.setOnClickListener(view -> {
-            //Toast.makeText(this, "Should start a new bathingsitesactivity", Toast.LENGTH_SHORT).show();
+        // Sets click listener on the button
+        fab.setOnClickListener(view -> {
+
             showToast();
+
         });
 
 //        FloatingActionButton fab = findViewById(R.id.floatingActionButton); //TODO:new!
@@ -259,7 +264,9 @@ public class MainActivity extends AppCompatActivity {
 
         //bathingSitesFragment = findViewById(R.id.bathingSitesFragment);
 
-        // Inflates the view for the toast message
+        fab = findViewById(R.id.floatingActionButton2);
+
+        // Inflates the view for the toast message //TODO:really here?
         view = LayoutInflater.from(MainActivity.this)
                 .inflate(R.layout.toast_layout, null);
 

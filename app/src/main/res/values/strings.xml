@@ -34,6 +34,7 @@
     <string name="toastGrade">Grade:</string>
     <string name="toastWaterTemp">Water temp:</string>
     <string name="toastDateForTemp">Date for temp:</string>
+    <string name="BathingSitesViewCounterText">\ bathing sites\</string>
 
 
 </resources>

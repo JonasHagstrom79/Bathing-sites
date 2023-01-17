@@ -19,7 +19,8 @@ public class BathingSitesView extends ConstraintLayout {
      */
     private int bathingSites = 0;
 
-
+    // Textviews to show info
+    TextView countertextView, message;
 
     /**
      * The view
@@ -30,14 +31,17 @@ public class BathingSitesView extends ConstraintLayout {
      * Custom constructor to use whe setting
      * */
     public BathingSitesView(@NonNull Context context) {
+
         super(context);
         init(null);
+
     }
 
     /**
      * Constructor used when setting bathing sites counter
      */
     public BathingSitesView(@NonNull Context context, @Nullable AttributeSet attrs) {
+
         super(context, attrs);
         init(null);
         // Method for setting bathing sites here
@@ -47,13 +51,17 @@ public class BathingSitesView extends ConstraintLayout {
      * Constructor used when creating instances of an xml file
      */
     public BathingSitesView(@NonNull Context context, @Nullable AttributeSet attrs, int defStyleAttr) {
+
         super(context, attrs, defStyleAttr);
         init(null);
+
     }
 
     // MAy not be needed
     public BathingSitesView(@NonNull Context context, @Nullable AttributeSet attrs, int defStyleAttr, int defStyleRes) {
+
         super(context, attrs, defStyleAttr, defStyleRes);
+
     }
 
     /**
@@ -61,29 +69,23 @@ public class BathingSitesView extends ConstraintLayout {
      */
     private void init(AttributeSet attrs) {
 
-        // Inflate
+        // Inflate the view
         inflate(getContext(), R.layout.view_bathingsitesview, this);
 
-        // Clicklistener for counting
-//        setOnClickListener(new OnClickListener() {
-//            @Override
-//            public void onClick(View view) {
-//                bathingSites ++;
-//            }
-//        });
+        // Get the views
+        findViews();
 
-        // Set the OnClickListener to call incrementCounter method
-//        if (this.onCounterChangeListener != null) {
-//            onCounterChangeListener.onCounterChanged(bathingSites);
-//        }
+        // Set clicklistener to be able to add bathingsites
         setOnClickListener(new OnClickListener() {
             @Override
             public void onClick(View view) {
+
                 incrementCounter();
+
             }
         });
 
-        // Retrieve custom attributes - No need?
+        // Retrieve custom attributes - //TODO: No need?
         TypedArray customAttributes = getContext().getTheme().obtainStyledAttributes(
                 attrs, // The base set of attribute values. May be null.
                 R.styleable.BathingSitesView, // Our custom attributes to be retrieved (in res/values/attrs.xml).
@@ -108,71 +110,101 @@ public class BathingSitesView extends ConstraintLayout {
 
     }
 
-    @Override
-    public void setOnClickListener(@Nullable OnClickListener l) {
-        super.setOnClickListener(l);
-    }
+//    @Override
+//    public void setOnClickListener(@Nullable OnClickListener l) {
+//
+//        super.setOnClickListener(l);
+//
+//    }
 
     /**
      * Sets the message for the view
      * */
      public void setMessage(@NonNull String newMessage) {
 
-        if (TextUtils.isEmpty(newMessage)) {
+         // Check if string i empty
+         if (TextUtils.isEmpty(newMessage)) {
 
-            return;
-        }
+             return;
 
-        TextView message = findViewById(R.id.textViewBathingSitesView);
+         }
+
+        // Set the message
+        message = findViewById(R.id.textViewBathingSitesView);
         message.setText(newMessage);
 
     }
 
+//    /**
+//     * Gets the bathingsites count from the view
+//     */
+//    public String getBathingSitesCount() {
+//
+//        //TextView bathingSitesCount = findViewById(R.id.);
+//        //return bathingSitesCount.getText().toString();
+//        return "..";
+//    }
+//
+//    /**
+//     * Counter for bathingsites
+//     */
+//    public void setCounter(int counter) {
+//
+//        bathingSites = counter;
+//
+//    }
+
+//    public int getCounter() {
+//
+//        return bathingSites;
+//
+//    }
+//
+//    ////
+//
+//    public interface OnCounterChangeListener {
+//
+//        void onCounterChanged(int counter);
+//
+//    }
+//
+//    private OnCounterChangeListener onCounterChangeListener;
+
+//    public void setOnCounterChangeListener(OnCounterChangeListener listener) {
+//
+//        this.onCounterChangeListener = listener;
+//
+//    }
+
     /**
-     * Gets the bathingsites count from the view
+     * Adds one bathingplace for each click on the picture
      */
-    public String getBathingSitesCount() {
-
-        //TextView bathingSitesCount = findViewById(R.id.);
-        //return bathingSitesCount.getText().toString();
-        return "..";
-    }
-
-    /**
-     * Counter for bathingsites
-     */
-    public void setCounter(int counter) {
-
-        bathingSites = counter;
-
-    }
-
-    public int getCounter() {
-
-        return bathingSites;
-
-    }
-
-    ////
-
-    public interface OnCounterChangeListener {
-        void onCounterChanged(int counter);
-    }
-
-    private OnCounterChangeListener onCounterChangeListener;
-
-    public void setOnCounterChangeListener(OnCounterChangeListener listener) {
-        this.onCounterChangeListener = listener;
-    }
-
     private void incrementCounter() {
+
+        // Add one for each click
         bathingSites++;
-        Log.d("TEst", "Bathingsites" + bathingSites);
-        TextView countertextView = findViewById(R.id.textViewBathingSitesView);
-        countertextView.setText(String.valueOf(bathingSites + " bathing sites"));
-        if (onCounterChangeListener != null) {
-            onCounterChangeListener.onCounterChanged(bathingSites);
-        }
+        
+        Log.d("TEst", "Bathingsites" + bathingSites); //TODO:remove!
+        countertextView = findViewById(R.id.textViewBathingSitesView);
+        
+        // Set the text for the view
+        countertextView.setText(String.valueOf(bathingSites + getContext().getString(R.string.BathingSitesViewCounterText)));
+        
+//        if (onCounterChangeListener != null) {
+//
+//            onCounterChangeListener.onCounterChanged(bathingSites);
+//
+//        }
+
+    }
+
+    /**
+     * Get the views
+     */
+    private void findViews() {
+
+        countertextView = findViewById(R.id.textViewBathingSitesView);
+        message = findViewById(R.id.textViewBathingSitesView);
 
     }
 
