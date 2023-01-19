@@ -35,6 +35,9 @@
     <string name="toastWaterTemp">Water temp:</string>
     <string name="toastDateForTemp">Date for temp:</string>
     <string name="BathingSitesViewCounterText">\ bathing sites\</string>
+    <string name="addressError">Address is required</string>
+    <string name="longitudeError">Longitude is required</string>
+    <string name="latitudeError">Latitude is required</string>
 
 
 </resources>

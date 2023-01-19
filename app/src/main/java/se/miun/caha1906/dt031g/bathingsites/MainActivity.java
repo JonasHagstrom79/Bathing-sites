@@ -1,6 +1,7 @@
 package se.miun.caha1906.dt031g.bathingsites;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
 
 import android.annotation.SuppressLint;
@@ -132,10 +133,25 @@ public class MainActivity extends AppCompatActivity {
         transaction.addToBackStack(null);
         transaction.commit();
 
+        //For testing //TODO:remove!
+        // Replace the current fragment with AddBathingSiteFragment
+        FragmentManager fragmentManager = getSupportFragmentManager();
+        FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
+
+        fragmentTransaction.replace(R.id.fragment_container, new AddBathingSiteFragment());
+
+        fragmentTransaction.commit();
+        // For testing //TODO:remove!
+
         // Sets click listener on the button
         fab.setOnClickListener(view -> {
 
-            showToast();
+            // Creates an intent to start AddBathingSitesActivity
+            Intent addBathingSiteIntent = new Intent(MainActivity.this,
+                    AddBathingSiteActivity.class);
+
+            startActivity(addBathingSiteIntent);
+            //showToast(); //TODO:For testing!
 
         });
 
@@ -199,56 +215,47 @@ public class MainActivity extends AppCompatActivity {
     // Gets the menu
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
+
         getMenuInflater().inflate(R.menu.main_menu, menu);
         return true;
+
     }
 
     // Handle Clear and save
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
 
-        String text = "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean euismod bibendum laoreet.";
-        StringBuilder sb = new StringBuilder(text);
-
-        int i = 0;
-        while (i + 40 < sb.length() && (i = sb.lastIndexOf(" ", i + 40)) != -1) {
-            sb.replace(i, i + 1, "\n");
-        }
-        String newText = sb.toString();
-
-
         // Clear the input
         if (item.getItemId() == R.id.action_clear) {
-            Toast.makeText(this, getString(R.string.toastName)+" "+"name"
-                    +"\n"+getString(R.string.toastDescription)+" "+"description"
-                    +"\n"+getString(R.string.toastAddress)+" "+"address"
-                    +"\n"+getString(R.string.toastLongitude)+" "+"Longitude"
-                    +"\n"+getString(R.string.toastLatitude)+" "+"Latitude"
-                    +"\n"+getString(R.string.toastGrade)+" "+"4.0"
-                    +"\n"+getString(R.string.toastWaterTemp)+" "+"10.4"
-                    +"\n"+getString(R.string.toastDateForTemp)+" "+"2020-08-13"
-                    ,Toast.LENGTH_SHORT).show(); //TODO:remove!
+
+            // Get the views
+            findViews();
 
             // Clear the inputfields and set todays date
-            //clearInputFields();
-            //setTodaysDate();
+            clearInputFields();
+
+            setTodaysDate();
 
             return true;
         }
 
         // Saves the input
         if (item.getItemId() == R.id.action_save) {
-
+            showToast();
             if (nameIsEmpty()) {
                 // Displays error messgage
-                name.setError(getString(R.string.nameError));
+                //name.setError(getString(R.string.nameError));
 
             }
             if (addressLongLatIsEmpty()) {
                 // Displays error message
                 //TODO: locic here or in method?
-            }
+            }else {
+                findViews();
+//                showToast();
 
+            }
+            return true;
         }
 
         return super.onOptionsItemSelected(item);
@@ -331,11 +338,15 @@ public class MainActivity extends AppCompatActivity {
      */
     private boolean nameIsEmpty() {
 
+        // Fid the views
+        findViews();
+
         // Get the string
-        nameCheck = name.getText().toString();
+        nameCheck = name.getText().toString().trim();
 
         // Check if string is empty
         if (nameCheck.isEmpty()) {
+
             name.setError(getString(R.string.nameError));
             return true;
 
@@ -350,23 +361,35 @@ public class MainActivity extends AppCompatActivity {
      */
     private boolean addressLongLatIsEmpty() {
 
-        addressCheck = address.getText().toString();
-        longitudeCheck = longitude.getText().toString();
-        latitudeCheck = latitude.getText().toString();
+        addressCheck = address.getText().toString().trim();
+        longitudeCheck = longitude.getText().toString().trim();
+        latitudeCheck = latitude.getText().toString().trim();
 
         if (addressCheck.isEmpty() && (longitudeCheck.isEmpty() || latitudeCheck.isEmpty())) {
             // Show error message because either longitude or latitude must be entered if address is not entered
-
+            address.setError(getString(R.string.addressError));
             return true;
-        } else if (longitudeCheck.isEmpty() && latitudeCheck.isEmpty() && addressCheck.isEmpty()) {
+        } else if (longitudeCheck.isEmpty() || latitudeCheck.isEmpty()) {
             // Show error message because either address, longitude or latitude must be entered
+            if (longitudeCheck.isEmpty()) {
+                longitude.setError(getString(R.string.longitudeError));
+                return true;
+            }
+            if (latitudeCheck.isEmpty()) {
+                latitude.setError(getString(R.string.latitudeError));
+                return true;
+            } else {
+                return false;
+            }
 
-            return true;
-        } else {
-            // Continue with process, all required fields are entered
-
-            return false;
         }
+        return true;
+//            return true;
+//        } else {
+//            // Continue with process, all required fields are entered
+//
+//            return false;
+//        }
 
     }
 
