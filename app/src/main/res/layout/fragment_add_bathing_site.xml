@@ -125,7 +125,7 @@
         android:ems="10"
         android:hint="@string/editTextWaterTempHint"
 
-        android:inputType="number"
+        android:inputType="numberDecimal"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toStartOf="@+id/editTextTextBathingSiteDAteForTemp"
         app:layout_constraintHeight_percent=".08"

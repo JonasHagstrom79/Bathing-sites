@@ -241,24 +241,28 @@ public class MainActivity extends AppCompatActivity {
 
         // Saves the input
         if (item.getItemId() == R.id.action_save) {
-            showToast();
+
             if (nameIsEmpty()) {
-                // Displays error messgage
-                //name.setError(getString(R.string.nameError));
+
+                // Displays error messgage from method
 
             }
             if (addressLongLatIsEmpty()) {
                 // Displays error message
-                //TODO: locic here or in method?
+
             }else {
-                findViews();
-//                showToast();
+
+                showToast();
 
             }
+
             return true;
+
         }
 
+        //
         return super.onOptionsItemSelected(item);
+
     }
 
     /**
@@ -334,19 +338,20 @@ public class MainActivity extends AppCompatActivity {
     }
 
     /**
-     * Check if name is empty
+     * Check if name is empty and display an error message
      */
     private boolean nameIsEmpty() {
 
-        // Fid the views
+        // Find the views
         findViews();
 
-        // Get the string
+        // Get field to check
         nameCheck = name.getText().toString().trim();
 
         // Check if string is empty
         if (nameCheck.isEmpty()) {
 
+            // Display an error message
             name.setError(getString(R.string.nameError));
             return true;
 
@@ -357,39 +362,47 @@ public class MainActivity extends AppCompatActivity {
 
     /**
      * Checks that if adress not submitted, both longitude and latitude must be submitted.
-     * Or if either longitude or latitude not submitted, adress must be submitted.
+     * Or if either longitude or latitude not submitted, adress must be submitted. Also display
+     * error message
      */
     private boolean addressLongLatIsEmpty() {
 
+        // Get the fields to check
         addressCheck = address.getText().toString().trim();
         longitudeCheck = longitude.getText().toString().trim();
         latitudeCheck = latitude.getText().toString().trim();
 
         if (addressCheck.isEmpty() && (longitudeCheck.isEmpty() || latitudeCheck.isEmpty())) {
+
             // Show error message because either longitude or latitude must be entered if address is not entered
             address.setError(getString(R.string.addressError));
             return true;
+
         } else if (longitudeCheck.isEmpty() || latitudeCheck.isEmpty()) {
-            // Show error message because either address, longitude or latitude must be entered
+
+
             if (longitudeCheck.isEmpty()) {
+
+                // Shows error message if longitude is missing
                 longitude.setError(getString(R.string.longitudeError));
                 return true;
+
             }
             if (latitudeCheck.isEmpty()) {
+
+                // Shows error message if latitude is missing
                 latitude.setError(getString(R.string.latitudeError));
                 return true;
+
             } else {
+
                 return false;
+
             }
 
         }
-        return true;
-//            return true;
-//        } else {
-//            // Continue with process, all required fields are entered
-//
-//            return false;
-//        }
+
+        return false;
 
     }
 
@@ -401,32 +414,20 @@ public class MainActivity extends AppCompatActivity {
         // Creates the toast
         toast = new Toast(MainActivity.this);
 
-        // Inflates the view
-//        View view = LayoutInflater.from(MainActivity.this)
-//                .inflate(R.layout.toast_layout, null);
-//
-//        toastName = view.findViewById(R.id.tvMessageName);
-//        toastAddress = view.findViewById(R.id.tvMessageAddress);
-//        toastDescription = view.findViewById(R.id.tvMessageDescription);
-//        toastLongitude = view.findViewById(R.id.tvMessageLongitude);
-//        toastLatitude = view.findViewById(R.id.tvMessageLatitude);
-//        toastGrade = view.findViewById(R.id.tvMessageGrade);
-//        toastWaterTemp = view.findViewById(R.id.tvMessageWaterTemp);
-//        toastDateForTemp = view.findViewById(R.id.tvMessageDateForTemp);
-
         // Set message to be displayed
-        toastName.setText(getString(R.string.toastName)+" "+"Önsjön");
-        toastDescription.setText(getString(R.string.toastDescription)+" "+ "Placeholder");
-        toastAddress.setText(getString(R.string.toastAddress)+" "+"Önsjön, Östersund");
-        toastLongitude.setText(getString(R.string.toastLongitude)+" "+"14,688506");
-        toastLatitude.setText(getString(R.string.toastLatitude)+" "+"63,261078");
-        toastGrade.setText(getString(R.string.toastGrade)+ " "+"4.0");
-        toastWaterTemp.setText(getString(R.string.toastWaterTemp)+" "+"10.4");
-        toastDateForTemp.setText(getString(R.string.toastDateForTemp)+" "+"2020-08-13");
+        toastName.setText(getString(R.string.toastName)+" "+address.getText().toString());
+        toastDescription.setText(getString(R.string.toastDescription)+" "+description.getText().toString());
+        toastAddress.setText(getString(R.string.toastAddress)+" "+address.getText().toString());
+        toastLongitude.setText(getString(R.string.toastLongitude)+" "+longitude.getText().toString());
+        toastLatitude.setText(getString(R.string.toastLatitude)+" "+latitude.getText().toString());
+        toastGrade.setText(getString(R.string.toastGrade)+ " "+grade.getRating());
+        toastWaterTemp.setText(getString(R.string.toastWaterTemp)+" "+waterTemp.getText().toString());
+        toastDateForTemp.setText(getString(R.string.toastDateForTemp)+" "+dateForTemp.getText().toString());
 
         // Set and show toast
         toast.setView(view);
         toast.show();
+
     }
 
 
