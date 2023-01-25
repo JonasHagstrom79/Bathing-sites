@@ -75,6 +75,7 @@ public class MainActivity extends AppCompatActivity {
 
         // Get the views
         findViews();
+        //setTodaysDate();
         //@SuppressLint({"MissingInflatedId", "LocalSuppress"}) BathingSitesView bathingSiteView = findViewById(R.id.bathing_site_view);
         //BathingSitesView bathingSiteView = new BathingSitesView(this); //TODO: funkar med denna me hänns fel?
 
@@ -139,6 +140,7 @@ public class MainActivity extends AppCompatActivity {
         FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
 
         fragmentTransaction.replace(R.id.fragment_container, new AddBathingSiteFragment());
+//        fragmentTransaction.replace(R.id.fragment_container, new BathingSitesFragment()); //TODO: HERE for fragment!
 
         fragmentTransaction.commit();
         // For testing //TODO:remove!
@@ -233,7 +235,6 @@ public class MainActivity extends AppCompatActivity {
 
             // Clear the inputfields and set todays date
             clearInputFields();
-
             setTodaysDate();
 
             return true;
@@ -248,6 +249,7 @@ public class MainActivity extends AppCompatActivity {
 
             }
             if (addressLongLatIsEmpty()) {
+
                 // Displays error message
 
             }else {
@@ -372,34 +374,35 @@ public class MainActivity extends AppCompatActivity {
         longitudeCheck = longitude.getText().toString().trim();
         latitudeCheck = latitude.getText().toString().trim();
 
-        if (addressCheck.isEmpty() && (longitudeCheck.isEmpty() || latitudeCheck.isEmpty())) {
+        if (addressCheck.isEmpty() && longitudeCheck.isEmpty() && latitudeCheck.isEmpty()) {
 
-            // Show error message because either longitude or latitude must be entered if address is not entered
             address.setError(getString(R.string.addressError));
+            longitude.setError(getString(R.string.longitudeError));
+            latitude.setError(getString(R.string.latitudeError));
             return true;
 
-        } else if (longitudeCheck.isEmpty() || latitudeCheck.isEmpty()) {
+        }
 
+        if (addressCheck.isEmpty() && longitudeCheck.isEmpty()) {
 
-            if (longitudeCheck.isEmpty()) {
+            address.setError(getString(R.string.addressError));
+            longitude.setError(getString(R.string.longitudeError));
+            return true;
 
-                // Shows error message if longitude is missing
-                longitude.setError(getString(R.string.longitudeError));
-                return true;
+        }
 
-            }
-            if (latitudeCheck.isEmpty()) {
+        if (addressCheck.isEmpty() && latitudeCheck.isEmpty()) {
 
-                // Shows error message if latitude is missing
-                latitude.setError(getString(R.string.latitudeError));
-                return true;
+            address.setError(getString(R.string.addressError));
+            latitude.setError(getString(R.string.latitudeError));
+            return true;
+        }
 
-            } else {
+        if (longitudeCheck.isEmpty() && latitudeCheck.isEmpty()) {
 
-                return false;
-
-            }
-
+            longitude.setError(getString(R.string.longitudeError));
+            latitude.setError(getString(R.string.latitudeError));
+            return true;
         }
 
         return false;
@@ -415,7 +418,7 @@ public class MainActivity extends AppCompatActivity {
         toast = new Toast(MainActivity.this);
 
         // Set message to be displayed
-        toastName.setText(getString(R.string.toastName)+" "+address.getText().toString());
+        toastName.setText(getString(R.string.toastName)+" "+name.getText().toString());
         toastDescription.setText(getString(R.string.toastDescription)+" "+description.getText().toString());
         toastAddress.setText(getString(R.string.toastAddress)+" "+address.getText().toString());
         toastLongitude.setText(getString(R.string.toastLongitude)+" "+longitude.getText().toString());
