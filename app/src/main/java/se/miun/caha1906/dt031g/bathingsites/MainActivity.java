@@ -36,6 +36,7 @@ public class MainActivity extends AppCompatActivity {
 
     private static final String TAG_FRAGMENT_BATHING_SITES = "fragment_bathing_sites"; //TODO:new!
     private BathingSitesFragment bathingSitesFragment; //TODO: new!
+    private AddBathingSiteFragment addBathingSitesFragment; //TODO New!
 
     // Edittext from fragment
     EditText name, description, address, longitude, latitude, waterTemp, dateForTemp;
@@ -65,7 +66,7 @@ public class MainActivity extends AppCompatActivity {
     // Floating action button
     FloatingActionButton fab;
 
-    @SuppressLint("ResourceType")
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         //savedInstanceState.putInt(); //TODO:här!!!!
@@ -131,29 +132,43 @@ public class MainActivity extends AppCompatActivity {
 
         // Adds to transaction container
         transaction.replace(R.id.fragment_container, bathingSitesFragment, TAG_FRAGMENT_BATHING_SITES);
+//        View abc = findViewById(R.id.fragment_container); //TODO:TEST
+//        Log.d("Tag", "findViewById(R.id.fragment_container) "+abc); //TODO:TEST
         transaction.addToBackStack(null);
         transaction.commit();
 
-        //For testing //TODO:remove!
-        // Replace the current fragment with AddBathingSiteFragment
-        FragmentManager fragmentManager = getSupportFragmentManager();
-        FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
+//        // Replace the current fragment with AddBathingSiteFragment
+//        FragmentManager fragmentManager = getSupportFragmentManager();
+//        FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
 
-        fragmentTransaction.replace(R.id.fragment_container, new AddBathingSiteFragment());
+//        fragmentTransaction.replace(R.id.fragment_container, new AddBathingSiteFragment());
 //        fragmentTransaction.replace(R.id.fragment_container, new BathingSitesFragment()); //TODO: HERE for fragment!
 
-        fragmentTransaction.commit();
+//        fragmentTransaction.commit();
         // For testing //TODO:remove!
 
         // Sets click listener on the button
         fab.setOnClickListener(view -> {
 
-            // Creates an intent to start AddBathingSitesActivity
-            Intent addBathingSiteIntent = new Intent(MainActivity.this,
-                    AddBathingSiteActivity.class);
+//            // Creates an intent to start AddBathingSitesActivity
+//            Intent addBathingSiteIntent = new Intent(MainActivity.this,
+//                    AddBathingSiteActivity.class);
+//
+//            startActivity(addBathingSiteIntent);
+//            //showToast(); //TODO:For testing!
 
-            startActivity(addBathingSiteIntent);
-            //showToast(); //TODO:For testing!
+            // Creates transaction for fragment
+            FragmentTransaction transaction2 = getSupportFragmentManager().beginTransaction();
+
+            // Creates new fragment
+            AddBathingSiteFragment addBathingSitesFragment = new AddBathingSiteFragment();
+
+            // Adds to transaction container
+            transaction2.replace(R.id.fragment_container, addBathingSitesFragment);
+//        View abc = findViewById(R.id.fragment_container); //TODO:TEST
+//        Log.d("Tag", "findViewById(R.id.fragment_container) "+abc); //TODO:TEST
+            transaction2.addToBackStack(null);
+            transaction2.commit();
 
         });
 
