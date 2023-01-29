@@ -4,7 +4,9 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
 
+import android.content.res.Configuration;
 import android.os.Bundle;
+import android.util.Log;
 
 public class AddBathingSiteActivity extends AppCompatActivity {
 
@@ -14,12 +16,27 @@ public class AddBathingSiteActivity extends AppCompatActivity {
         //setContentView(R.layout.activity_add_bathing_site);
         setContentView(R.layout.fragment_add_bathing_site);
 
-        // Replace the current fragment with AddBathingSiteFragment
-        FragmentManager fragmentManager = getSupportFragmentManager();
-        FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
+        // Get current orientation
+        int orientation = getResources().getConfiguration().orientation;
 
-        fragmentTransaction.replace(R.id.fragment_container, new AddBathingSiteFragment());
+        // Check orientation and set appropriate layoute
+        if (orientation == Configuration.ORIENTATION_LANDSCAPE) {
+            Log.d("If sats", "If sats ");
+            setContentView(R.layout.activity_add_bathing_site_land);
 
-        fragmentTransaction.commit();
+        } else {
+
+            setContentView(R.layout.activity_add_bathing_site);
+
+        }
+
+
+//        // Replace the current fragment with AddBathingSiteFragment //TODO: behövs nog ej!
+//        FragmentManager fragmentManager = getSupportFragmentManager();
+//        FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
+//
+//        fragmentTransaction.replace(R.id.fragment_container, new AddBathingSiteFragment());
+//
+//        fragmentTransaction.commit();
     }
 }

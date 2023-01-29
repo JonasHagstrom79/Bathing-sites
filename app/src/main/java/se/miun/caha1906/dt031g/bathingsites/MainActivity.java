@@ -6,6 +6,7 @@ import androidx.fragment.app.FragmentTransaction;
 
 import android.annotation.SuppressLint;
 import android.content.Intent;
+import android.content.res.Configuration;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -150,25 +151,29 @@ public class MainActivity extends AppCompatActivity {
         // Sets click listener on the button
         fab.setOnClickListener(view -> {
 
-//            // Creates an intent to start AddBathingSitesActivity
-//            Intent addBathingSiteIntent = new Intent(MainActivity.this,
-//                    AddBathingSiteActivity.class);
+//            // Creates transaction for fragment //TODO: fungerande kod!
+//            FragmentTransaction transaction2 = getSupportFragmentManager().beginTransaction();
 //
-//            startActivity(addBathingSiteIntent);
-//            //showToast(); //TODO:For testing!
+//            // Creates new fragment
+//            AddBathingSiteFragment addBathingSitesFragment = new AddBathingSiteFragment();
+//
+//            // Adds to transaction container
+//            transaction2.replace(R.id.fragment_container, addBathingSitesFragment);
+////        View abc = findViewById(R.id.fragment_container); //TODO:TEST
+////        Log.d("Tag", "findViewById(R.id.fragment_container) "+abc); //TODO:TEST
+//            transaction2.addToBackStack(null);
+//            transaction2.commit();
 
-            // Creates transaction for fragment
-            FragmentTransaction transaction2 = getSupportFragmentManager().beginTransaction();
+            // Show both fragments side by side in landscape mode
+            if (getResources().getConfiguration().orientation == Configuration.ORIENTATION_LANDSCAPE) {
 
-            // Creates new fragment
-            AddBathingSiteFragment addBathingSitesFragment = new AddBathingSiteFragment();
+                setContentView(R.layout.activity_add_bathing_site_land);
 
-            // Adds to transaction container
-            transaction2.replace(R.id.fragment_container, addBathingSitesFragment);
-//        View abc = findViewById(R.id.fragment_container); //TODO:TEST
-//        Log.d("Tag", "findViewById(R.id.fragment_container) "+abc); //TODO:TEST
-            transaction2.addToBackStack(null);
-            transaction2.commit();
+            } else {
+
+                setContentView(R.layout.activity_add_bathing_site); //TODO:Fungerar ej!!!!!
+
+            }
 
         });
 
