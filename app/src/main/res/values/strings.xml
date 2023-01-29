@@ -38,6 +38,8 @@
     <string name="addressError">Address is required</string>
     <string name="longitudeError">Longitude is required</string>
     <string name="latitudeError">Latitude is required</string>
+    <string name="titleForSupportActionBar">Add Bathing Place</string>
+    <string name="title_bathing_site_activity">Add Bathing place</string>
 
 
 </resources>

@@ -1,5 +1,6 @@
 package se.miun.caha1906.dt031g.bathingsites;
 
+import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
@@ -16,12 +17,19 @@ public class AddBathingSiteActivity extends AppCompatActivity {
         //setContentView(R.layout.activity_add_bathing_site);
         setContentView(R.layout.fragment_add_bathing_site);
 
-        // Get current orientation
-        int orientation = getResources().getConfiguration().orientation;
+        if (savedInstanceState != null) {
+            return;
+        }
 
-        // Check orientation and set appropriate layoute
-        if (orientation == Configuration.ORIENTATION_LANDSCAPE) {
-            Log.d("If sats", "If sats ");
+        // Activates support action bar //TODO: Behövs ej då det är inlagt i manifest-filen
+//        ActionBar actionBar = getSupportActionBar(); //TODO: fungerar i main men inte här!
+//        if (actionBar != null) {
+//            actionBar.setTitle(R.string.titleForSupportActionBar);
+//            actionBar.setDisplayHomeAsUpEnabled(true);
+//        }
+
+        if (getResources().getConfiguration().orientation == Configuration.ORIENTATION_LANDSCAPE) {
+
             setContentView(R.layout.activity_add_bathing_site_land);
 
         } else {
@@ -29,6 +37,22 @@ public class AddBathingSiteActivity extends AppCompatActivity {
             setContentView(R.layout.activity_add_bathing_site);
 
         }
+
+
+
+//        // Get current orientation //TODO: behövs ej!
+//        int orientation = getResources().getConfiguration().orientation;
+//
+//        // Check orientation and set appropriate layoute
+//        if (orientation == Configuration.ORIENTATION_LANDSCAPE) {
+//            Log.d("If sats", "If sats ");
+//            setContentView(R.layout.activity_add_bathing_site_land);
+//
+//        } else {
+//
+//            setContentView(R.layout.activity_add_bathing_site);
+//
+//        }
 
 
 //        // Replace the current fragment with AddBathingSiteFragment //TODO: behövs nog ej!
@@ -39,4 +63,12 @@ public class AddBathingSiteActivity extends AppCompatActivity {
 //
 //        fragmentTransaction.commit();
     }
+
+//    @Override
+//    public void onSaveInstanceState(Bundle outState) {
+//        super.onSaveInstanceState(outState);
+//        outState.putInt("activity_key", current_activity);
+//    }
+
+
 }

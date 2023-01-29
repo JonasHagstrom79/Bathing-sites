@@ -164,16 +164,18 @@ public class MainActivity extends AppCompatActivity {
 //            transaction2.addToBackStack(null);
 //            transaction2.commit();
 
-            // Show both fragments side by side in landscape mode
-            if (getResources().getConfiguration().orientation == Configuration.ORIENTATION_LANDSCAPE) {
-
-                setContentView(R.layout.activity_add_bathing_site_land);
-
-            } else {
-
-                setContentView(R.layout.activity_add_bathing_site); //TODO:Fungerar ej!!!!!
-
-            }
+//            // Show both fragments side by side in landscape mode //TODO: fungerar men kanske på fel ställe?
+//            if (getResources().getConfiguration().orientation == Configuration.ORIENTATION_LANDSCAPE) {
+//
+//                setContentView(R.layout.activity_add_bathing_site_land);
+//
+//            } else {
+//
+//                setContentView(R.layout.activity_add_bathing_site);
+//
+//            }
+            Intent intent = new Intent(MainActivity.this, AddBathingSiteActivity.class);
+            startActivity(intent);
 
         });
 
