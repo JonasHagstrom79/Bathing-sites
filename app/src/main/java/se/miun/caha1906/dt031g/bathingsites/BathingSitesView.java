@@ -1,7 +1,10 @@
 package se.miun.caha1906.dt031g.bathingsites;
 
 import android.content.Context;
+import android.content.SharedPreferences;
+import android.content.res.Configuration;
 import android.content.res.TypedArray;
+import android.os.Bundle;
 import android.text.TextUtils;
 import android.util.AttributeSet;
 import android.util.Log;
@@ -135,47 +138,6 @@ public class BathingSitesView extends ConstraintLayout {
 
     }
 
-//    /**
-//     * Gets the bathingsites count from the view
-//     */
-//    public String getBathingSitesCount() {
-//
-//        //TextView bathingSitesCount = findViewById(R.id.);
-//        //return bathingSitesCount.getText().toString();
-//        return "..";
-//    }
-//
-//    /**
-//     * Counter for bathingsites
-//     */
-//    public void setCounter(int counter) {
-//
-//        bathingSites = counter;
-//
-//    }
-
-//    public int getCounter() {
-//
-//        return bathingSites;
-//
-//    }
-//
-//    ////
-//
-//    public interface OnCounterChangeListener {
-//
-//        void onCounterChanged(int counter);
-//
-//    }
-//
-//    private OnCounterChangeListener onCounterChangeListener;
-
-//    public void setOnCounterChangeListener(OnCounterChangeListener listener) {
-//
-//        this.onCounterChangeListener = listener;
-//
-//    }
-
     /**
      * Adds one bathingplace for each click on the picture
      */
@@ -183,18 +145,11 @@ public class BathingSitesView extends ConstraintLayout {
 
         // Add one for each click
         bathingSites++;
-        
-        Log.d("TEst", "Bathingsites" + bathingSites); //TODO:remove!
+
         countertextView = findViewById(R.id.textViewBathingSitesView);
         
         // Set the text for the view
         countertextView.setText(String.valueOf(bathingSites + getContext().getString(R.string.BathingSitesViewCounterText)));
-        
-//        if (onCounterChangeListener != null) {
-//
-//            onCounterChangeListener.onCounterChanged(bathingSites);
-//
-//        }
 
     }
 
