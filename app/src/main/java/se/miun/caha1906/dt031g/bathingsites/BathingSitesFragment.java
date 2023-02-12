@@ -57,13 +57,12 @@ public class BathingSitesFragment extends androidx.fragment.app.Fragment {
 
     }
 
-
+    // Creates the fragment to be displayed in mainactivity
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
 
         // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.fragment_bathing_sites, container, false);
-
 
         return view;
 
