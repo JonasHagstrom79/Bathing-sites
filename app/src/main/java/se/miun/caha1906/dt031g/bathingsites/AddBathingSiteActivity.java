@@ -1,5 +1,7 @@
 package se.miun.caha1906.dt031g.bathingsites;
 
+import static se.miun.caha1906.dt031g.bathingsites.MainActivity.TAG_FRAGMENT_BATHING_SITES;
+
 import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.FragmentManager;
@@ -21,6 +23,9 @@ import java.text.SimpleDateFormat;
 import java.util.Calendar;
 
 public class AddBathingSiteActivity extends AppCompatActivity {
+
+    private int counter = 0;
+    private static final String KEY_COUNTER = "key_counter";
 
     // Edittext from fragment
     EditText name, description, address, longitude, latitude, waterTemp, dateForTemp;
@@ -50,20 +55,14 @@ public class AddBathingSiteActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        //setContentView(R.layout.activity_add_bathing_site);
+
         setContentView(R.layout.fragment_add_bathing_site);
 
         if (savedInstanceState != null) {
-            return;
+
+            counter = savedInstanceState.getInt("KEY_COUNTER", 0);
         }
-
-        // Activates support action bar //TODO: Behövs ej då det är inlagt i manifest-filen
-//        ActionBar actionBar = getSupportActionBar(); //TODO: fungerar i main men inte här!
-//        if (actionBar != null) {
-//            actionBar.setTitle(R.string.titleForSupportActionBar);
-//            actionBar.setDisplayHomeAsUpEnabled(true);
-//        }
-
+        // Checks the orientation of the device
         if (getResources().getConfiguration().orientation == Configuration.ORIENTATION_LANDSCAPE) {
 
             setContentView(R.layout.activity_add_bathing_site_land);
@@ -74,32 +73,6 @@ public class AddBathingSiteActivity extends AppCompatActivity {
 
         }
 
-
-
-
-
-//        // Get current orientation //TODO: behövs ej!
-//        int orientation = getResources().getConfiguration().orientation;
-//
-//        // Check orientation and set appropriate layoute
-//        if (orientation == Configuration.ORIENTATION_LANDSCAPE) {
-//            Log.d("If sats", "If sats ");
-//            setContentView(R.layout.activity_add_bathing_site_land);
-//
-//        } else {
-//
-//            setContentView(R.layout.activity_add_bathing_site);
-//
-//        }
-
-
-//        // Replace the current fragment with AddBathingSiteFragment //TODO: behövs nog ej!
-//        FragmentManager fragmentManager = getSupportFragmentManager();
-//        FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
-//
-//        fragmentTransaction.replace(R.id.fragment_container, new AddBathingSiteFragment());
-//
-//        fragmentTransaction.commit();
     }
 
     // Get the correct menu with clear and save options
@@ -110,6 +83,14 @@ public class AddBathingSiteActivity extends AppCompatActivity {
 
         return true;
 
+    }
+
+    @Override
+    public void onSaveInstanceState(Bundle outState) {
+
+        outState.putInt(KEY_COUNTER, counter);
+
+        super.onSaveInstanceState(outState);
     }
 
     // Handle Clear and save
@@ -161,9 +142,7 @@ public class AddBathingSiteActivity extends AppCompatActivity {
      */
     private void findViews() {
 
-        //fab = findViewById(R.id.floatingActionButton2);
-
-        // Inflates the view for the toast message //TODO:really here?
+        // Inflates the view for the toast message
         view = LayoutInflater.from(AddBathingSiteActivity.this)
                 .inflate(R.layout.toast_layout, null);
 
@@ -298,7 +277,7 @@ public class AddBathingSiteActivity extends AppCompatActivity {
      */
     private void showToast() {
 
-        // Creates the toast
+        // Creates the toast https://developer.android.com/reference/android/widget/Toast?hl=en
         toast = new Toast(AddBathingSiteActivity.this);
 
         // Set message to be displayed
@@ -316,13 +295,5 @@ public class AddBathingSiteActivity extends AppCompatActivity {
         toast.show();
 
     }
-
-
-//    @Override
-//    public void onSaveInstanceState(Bundle outState) {
-//        super.onSaveInstanceState(outState);
-//        outState.putInt("activity_key", current_activity);
-//    }
-
 
 }

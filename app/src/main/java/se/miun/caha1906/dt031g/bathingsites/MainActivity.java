@@ -1,5 +1,6 @@
 package se.miun.caha1906.dt031g.bathingsites;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
@@ -29,44 +30,28 @@ import java.util.Calendar;
 
 public class MainActivity extends AppCompatActivity {
 
-    //FloatingActionButton fab; //TODO:2023-01-10
-    BathingSitesView bathingSiteView;
+    // Constants used as a key to store or identify
+    public static final String TAG_FRAGMENT_BATHING_SITES = "fragment_bathing_sites";
+    private static final String KEY_COUNT_VALUE = "Countvalue";
+    private static final String KEY_BATHSITES_TEXT = "bathingSitesText";
 
-    private static final String TAG_FRAGMENT_BATHING_SITES = "fragment_bathing_sites"; //TODO:new!
-
-    // Edittext from fragment
-    EditText name, description, address, longitude, latitude, waterTemp, dateForTemp;
-
-    // Ratingbar from fragment
-    RatingBar grade;
-
-    // Todays date
-    String todaysDateFormatted, nameCheck, addressCheck, longitudeCheck, latitudeCheck;
-
-    // To set todays date
-    Calendar calendar;
-
-    // Formatting the date from calendar
-    SimpleDateFormat dateFormat;
+    // Stores the count value
+    private int count =0;
 
     // TextView for toast message
-    TextView toastName, toastDescription, toastAddress, toastLongitude,
-            toastLatitude, toastGrade, toastWaterTemp, toastDateForTemp;
-
-    // Toast
-    Toast toast;
-
-    // View
-    View view;
+    TextView countertextView;
 
     // Floating action button
     FloatingActionButton fab;
+
+    // For the view
+    BathingSitesView bathingSitesView;
 
 
     @SuppressLint("MissingInflatedId")
     @Override
     protected void onCreate(Bundle savedInstanceState) {
-        //savedInstanceState.putInt(); //TODO:här!!!!
+
         super.onCreate(savedInstanceState);
 
         setContentView((R.layout.activity_main));
@@ -74,7 +59,7 @@ public class MainActivity extends AppCompatActivity {
         // Get the views
         findViews();
 
-        // Start a new fragment transaction
+        // Start a new fragment transaction, https://developer.android.com/guide/fragments
         FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
 
         // Create a new instance of the bathing sites fragment
@@ -100,9 +85,20 @@ public class MainActivity extends AppCompatActivity {
 
         });
 
+        // Saved instance state
+        if (savedInstanceState != null) {
+
+            count = savedInstanceState.getInt(KEY_COUNT_VALUE, count);
+
+            countertextView.setText(count + " " + getString(R.string.bathingSitesText));
+
+        }
+
     }
 
-    // Gets the menu
+    /**
+     * Creates the menu
+     */
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
 
@@ -114,49 +110,60 @@ public class MainActivity extends AppCompatActivity {
 
     }
 
-    // Handle Clear and save
-//    @Override
-//    public boolean onOptionsItemSelected(MenuItem item) {
-//
-//        // Clear the input
-//        if (item.getItemId() == R.id.action_clear) {
-//
-//            // Get the views
-//            findViews();
-//
-//            // Clear the inputfields and set todays date
-//            clearInputFields();
-//            setTodaysDate();
-//
-//            return true;
-//        }
-//
-//        // Saves the input
-//        if (item.getItemId() == R.id.action_save) {
-//
-//            if (nameIsEmpty()) {
-//
-//                // Displays error messgage from method
-//
-//            }
-//            if (addressLongLatIsEmpty()) {
-//
-//                // Displays error message
-//
-//            }else {
-//
-//                showToast();
-//
-//            }
-//
-//            return true;
-//
-//        }
-//
-//        //
-//        return super.onOptionsItemSelected(item);
-//
-//    }
+    /**
+     * Saves the state
+     */
+    @Override
+    public void onSaveInstanceState(@NonNull Bundle outState) {
+
+        // Call the superclass's implementation of onSaveInstanceState()
+        super.onSaveInstanceState(outState);
+
+        // Save the value of the count variable
+        outState.putInt("Countvalue", count);
+
+        // Concatenate the count value with the string from the string resource file
+        String bathingSitesText = count + getString(R.string.BathingSitesViewCounterText);
+
+        // Put the string into the outState bundle with a key for later retrieval
+        outState.putString(KEY_BATHSITES_TEXT, bathingSitesText);
+
+    }
+
+    @Override
+    public void onRestoreInstanceState(@NonNull Bundle savedInstanceState) {
+
+        super.onRestoreInstanceState(savedInstanceState);
+
+        // Get the saved value for count and set it to the count variable
+        count = savedInstanceState.getInt("Countvalue");
+
+        // Get the saved value for the bathing sites text
+        String bathingSitesText = savedInstanceState.getString(KEY_BATHSITES_TEXT);
+
+        // Get the textview object
+        TextView textView = findViewById(R.id.textViewBathingSitesView);
+
+        // Set the text for the view
+        textView.setText(bathingSitesText);
+    }
+
+
+    /**
+     * Adds +1 on counter in bathingsitesView
+     */
+    public void incrementBathingSitesCount() {
+
+        // Adds one to count
+        count++;
+
+        // Get the view
+        countertextView = findViewById(R.id.textViewBathingSitesView);
+
+        // Set the text for the view
+        countertextView.setText(String.valueOf(count + getString(R.string.BathingSitesViewCounterText)));
+
+    }
 
     /**
      * Get the views
@@ -164,160 +171,12 @@ public class MainActivity extends AppCompatActivity {
     private void findViews() {
 
         fab = findViewById(R.id.floatingActionButton2);
-//
-//        // Inflates the view for the toast message //TODO:really here?
-//        view = LayoutInflater.from(MainActivity.this)
-//                .inflate(R.layout.toast_layout, null);
-//
-//        // Edit text
-//        name = findViewById(R.id.editTextTextBathingSiteName);
-//        description = findViewById(R.id.editTextTextBathigSiteDescription);
-//        address = findViewById(R.id.editTextTextBathingSiteAddress);
-//        longitude = findViewById(R.id.editTextTextBathingSiteLongitude);
-//        latitude = findViewById(R.id.editTextTextBathingSiteLatitude);
-//        grade = findViewById(R.id.ratingBar);
-//        waterTemp = findViewById(R.id.editTextTextBathingSiteWaterTemperature);
-//        dateForTemp = findViewById(R.id.editTextTextBathingSiteDAteForTemp);
-//
-//        // Toast
-//        toastName = view.findViewById(R.id.tvMessageName);
-//        toastAddress = view.findViewById(R.id.tvMessageAddress);
-//        toastDescription = view.findViewById(R.id.tvMessageDescription);
-//        toastLongitude = view.findViewById(R.id.tvMessageLongitude);
-//        toastLatitude = view.findViewById(R.id.tvMessageLatitude);
-//        toastGrade = view.findViewById(R.id.tvMessageGrade);
-//        toastWaterTemp = view.findViewById(R.id.tvMessageWaterTemp);
-//        toastDateForTemp = view.findViewById(R.id.tvMessageDateForTemp);
+
+        bathingSitesView = findViewById(R.id.bathing_site_view);
+
+        countertextView = findViewById(R.id.textViewBathingSitesView);
 
     }
-
-//    /**
-//     * Clear the input fields in fragment
-//     */
-//    private void clearInputFields() {
-//
-//        name.getText().clear();
-//        description.getText().clear();
-//        address.getText().clear();
-//        longitude.getText().clear();
-//        latitude.getText().clear();
-//        grade.setNumStars(0);
-//        waterTemp.getText().clear();
-//        dateForTemp.getText().clear();
-//
-//    }
-
-    /**
-     * Sets todays date in datefiled in fragment
-     * */
-//    private void setTodaysDate() {
-//
-//        // Create an instance of calendar to get todays date
-//        calendar = Calendar.getInstance();
-//
-//        // Formatting the date
-//        dateFormat = new SimpleDateFormat("yyyy-MM-dd");
-//
-//        // Creates string with todays date
-//        todaysDateFormatted = dateFormat.format(calendar.getTime());
-//
-//        // Sets the value of the field
-//        dateForTemp.setText(todaysDateFormatted);
-//    }
-
-    /**
-     * Check if name is empty and display an error message
-     */
-//    private boolean nameIsEmpty() {
-//
-//        // Find the views
-//        findViews();
-//
-//        // Get field to check
-//        nameCheck = name.getText().toString().trim();
-//
-//        // Check if string is empty
-//        if (nameCheck.isEmpty()) {
-//
-//            // Display an error message
-//            name.setError(getString(R.string.nameError));
-//            return true;
-//
-//        }
-//
-//        return false;
-//    }
-
-    /**
-     * Checks that if adress not submitted, both longitude and latitude must be submitted.
-     * Or if either longitude or latitude not submitted, adress must be submitted. Also display
-     * error message
-     */
-//    private boolean addressLongLatIsEmpty() {
-//
-//        // Get the fields to check
-//        addressCheck = address.getText().toString().trim();
-//        longitudeCheck = longitude.getText().toString().trim();
-//        latitudeCheck = latitude.getText().toString().trim();
-//
-//        if (addressCheck.isEmpty() && longitudeCheck.isEmpty() && latitudeCheck.isEmpty()) {
-//
-//            address.setError(getString(R.string.addressError));
-//            longitude.setError(getString(R.string.longitudeError));
-//            latitude.setError(getString(R.string.latitudeError));
-//            return true;
-//
-//        }
-//
-//        if (addressCheck.isEmpty() && longitudeCheck.isEmpty()) {
-//
-//            address.setError(getString(R.string.addressError));
-//            longitude.setError(getString(R.string.longitudeError));
-//            return true;
-//
-//        }
-//
-//        if (addressCheck.isEmpty() && latitudeCheck.isEmpty()) {
-//
-//            address.setError(getString(R.string.addressError));
-//            latitude.setError(getString(R.string.latitudeError));
-//            return true;
-//        }
-//
-//        if (longitudeCheck.isEmpty() && latitudeCheck.isEmpty()) {
-//
-//            longitude.setError(getString(R.string.longitudeError));
-//            latitude.setError(getString(R.string.latitudeError));
-//            return true;
-//        }
-//
-//        return false;
-//
-//    }
-
-    /**
-     * Displays custm toast with 8 lines of information
-     */
-//    private void showToast() {
-//
-//        // Creates the toast
-//        toast = new Toast(MainActivity.this);
-//
-//        // Set message to be displayed
-//        toastName.setText(getString(R.string.toastName)+" "+name.getText().toString());
-//        toastDescription.setText(getString(R.string.toastDescription)+" "+description.getText().toString());
-//        toastAddress.setText(getString(R.string.toastAddress)+" "+address.getText().toString());
-//        toastLongitude.setText(getString(R.string.toastLongitude)+" "+longitude.getText().toString());
-//        toastLatitude.setText(getString(R.string.toastLatitude)+" "+latitude.getText().toString());
-//        toastGrade.setText(getString(R.string.toastGrade)+ " "+grade.getRating());
-//        toastWaterTemp.setText(getString(R.string.toastWaterTemp)+" "+waterTemp.getText().toString());
-//        toastDateForTemp.setText(getString(R.string.toastDateForTemp)+" "+dateForTemp.getText().toString());
-//
-//        // Set and show toast
-//        toast.setView(view);
-//        toast.show();
-//
-//    }
 
 
 

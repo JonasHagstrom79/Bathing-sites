@@ -1,5 +1,6 @@
 package se.miun.caha1906.dt031g.bathingsites;
 
+import android.annotation.SuppressLint;
 import android.content.Context;
 import android.content.SharedPreferences;
 import android.content.res.Configuration;
@@ -8,6 +9,7 @@ import android.os.Bundle;
 import android.text.TextUtils;
 import android.util.AttributeSet;
 import android.util.Log;
+import android.view.MotionEvent;
 import android.view.View;
 import android.widget.TextView;
 
@@ -17,21 +19,25 @@ import androidx.constraintlayout.widget.ConstraintLayout;
 
 public class BathingSitesView extends ConstraintLayout {
 
-    /**
-     * Keeps track of the number of stored bathing sites
-     */
-    private int bathingSites = 0;
+    // Textview
+    TextView message;
 
-    // Textviews to show info
-    TextView countertextView, message;
+    // Listener for when the count changes
+    private OnCounterChangeListener listener;
+
+    // Instance of the BathingSitesView class
+    BathingSitesView b = this;
+
+    // Interface for the OnCounterChangeListener, from lab assignment
+    public interface OnCounterChangeListener {
+
+        // Callback method to be invoked when the counter changes
+        void onClick(BathingSitesView b);
+
+    }
 
     /**
-     * The view
-     */
-    BathingSitesView bathingSitesView = this;
-
-    /**
-     * Custom constructor to use whe setting
+     * Custom constructor
      * */
     public BathingSitesView(@NonNull Context context) {
 
@@ -47,7 +53,7 @@ public class BathingSitesView extends ConstraintLayout {
 
         super(context, attrs);
         init(null);
-        // Method for setting bathing sites here
+
     }
 
     /**
@@ -56,14 +62,7 @@ public class BathingSitesView extends ConstraintLayout {
     public BathingSitesView(@NonNull Context context, @Nullable AttributeSet attrs, int defStyleAttr) {
 
         super(context, attrs, defStyleAttr);
-        init(null);
-
-    }
-
-    // MAy not be needed
-    public BathingSitesView(@NonNull Context context, @Nullable AttributeSet attrs, int defStyleAttr, int defStyleRes) {
-
-        super(context, attrs, defStyleAttr, defStyleRes);
+        init(attrs);
 
     }
 
@@ -78,17 +77,10 @@ public class BathingSitesView extends ConstraintLayout {
         // Get the views
         findViews();
 
-        // Set clicklistener to be able to add bathingsites
-        setOnClickListener(new OnClickListener() {
-            @Override
-            public void onClick(View view) {
+        // Click event for the fragment
+        animeteClick();
 
-                incrementCounter();
-
-            }
-        });
-
-        // Retrieve custom attributes - //TODO: No need?
+        // Retrieve custom attributes, from lab assignment
         TypedArray customAttributes = getContext().getTheme().obtainStyledAttributes(
                 attrs, // The base set of attribute values. May be null.
                 R.styleable.BathingSitesView, // Our custom attributes to be retrieved (in res/values/attrs.xml).
@@ -113,12 +105,50 @@ public class BathingSitesView extends ConstraintLayout {
 
     }
 
-//    @Override
-//    public void setOnClickListener(@Nullable OnClickListener l) {
-//
-//        super.setOnClickListener(l);
-//
-//    }
+    /**
+     * Sets the listener for when the count changes
+     */
+    public void setOnCounterChangeListener(OnCounterChangeListener listener) {
+
+        this.listener = listener;
+
+    }
+
+    /**
+     * Sets up the touch event for the view
+     */
+    @SuppressLint("ClickableViewAccessibility")
+    private void animeteClick() { //From my lab assignment
+        setOnTouchListener((view, motionEvent) -> {
+
+            switch (motionEvent.getAction()) {
+                // When pushed
+                case MotionEvent.ACTION_DOWN:
+
+                    // Initiate custom listener from
+                    setOnCounterChangeListener(listener);
+                    if (this.listener != null) {
+                        listener.onClick(this);
+
+                    }
+                    // Increment the count in the MainActivity
+                    if (getContext() instanceof  MainActivity) {
+
+                        ((MainActivity) getContext()).incrementBathingSitesCount();
+
+                    }
+
+                    break;
+                // When released
+                case MotionEvent.ACTION_UP:
+                    //
+                    break;
+            }
+
+            return true;
+
+        });
+    }
 
     /**
      * Sets the message for the view
@@ -139,28 +169,14 @@ public class BathingSitesView extends ConstraintLayout {
     }
 
     /**
-     * Adds one bathingplace for each click on the picture
-     */
-    private void incrementCounter() {
-
-        // Add one for each click
-        bathingSites++;
-
-        countertextView = findViewById(R.id.textViewBathingSitesView);
-        
-        // Set the text for the view
-        countertextView.setText(String.valueOf(bathingSites + getContext().getString(R.string.BathingSitesViewCounterText)));
-
-    }
-
-    /**
      * Get the views
      */
     private void findViews() {
 
-        countertextView = findViewById(R.id.textViewBathingSitesView);
         message = findViewById(R.id.textViewBathingSitesView);
 
     }
+
+
 
 }

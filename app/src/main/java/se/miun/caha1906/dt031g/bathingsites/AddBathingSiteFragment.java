@@ -64,8 +64,6 @@ public class AddBathingSiteFragment extends androidx.fragment.app.Fragment {
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        // Inflate the layout for this fragment
-        //return inflater.inflate(R.layout.fragment_add_bathing_site, container, false); //TODO:commented out
 
         // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.fragment_add_bathing_site, container, false);
@@ -76,7 +74,7 @@ public class AddBathingSiteFragment extends androidx.fragment.app.Fragment {
         // Create a new object for todays date
         Date today = Calendar.getInstance().getTime();
 
-        // Format the date
+        // Format the date, https://developer.android.com/reference/java/text/SimpleDateFormat?hl=en
         SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd", Locale.getDefault());
         String todayString = sdf.format(today);
 
